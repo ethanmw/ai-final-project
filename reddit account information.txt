@@ -1,0 +1,3 @@
+email: cclarizi@nd.edu
+username: erinhh
+password: NDFightingIrish2019
