@@ -8,12 +8,15 @@ def usage():
 	print('Usage: {} {}'.format('erinhhbot.py',  'inputfile'))
 	exit()
 def bot_login():
-	r = praw.Reddit(client_id = '82TduHVnWOFMyg',client_secret = '5NpSiJGJSZS1XT7AV3j8sg1iByo',user_agent = '<console:ERINHH:0.0.1 (by /u/mcavanag>',username='mcavanag',password = 'AIproject')
-	#print 'Hello World'
-	return r
+	reddit = praw.Reddit(client_id="K5g9kvLpRnbxiQ",
+						client_secret="hRAt7B4HRxqoebJadbnVoxE_n98",
+						user_agent="erinhh:v1 (by /u/erinhh)",
+						username="erinhh",
+						password="NDFightingIrish2019")
+	return reddit
 
 def reader(inputfile):
-	with open(inputfile, "r") as file:
+	with open(inputfile, "r", encoding="utf-8") as file:
 		contents = file.read()
 	return contents
 
