@@ -1,0 +1,8 @@
+andrews-mbp:erinhh Drew$ ./erinhhbot.py data/aww.txt 1 data/aww1.txt 3
+You give the frog arrives.
+andrews-mbp:erinhh Drew$ ./erinhhbot.py data/aww.txt 1 data/aww1.txt 5
+You give the frog pledges a life debt to you. In your darkest hour, the frog pledges a life debt to you. In your darkest hour, the frog pledges a life debt to you. In your darkest hour, the frog pledges a life debt to you. In your darkest hour, the frog water to drink. Unknown to you, the frog arrives.
+andrews-mbp:erinhh Drew$ ./erinhhbot.py data/aww.txt 1 data/aww1.txt 5
+You give the frog arrives.
+andrews-mbp:erinhh Drew$ ./erinhhbot.py data/aww.txt 1 data/aww1.txt 5
+You give the frog water to drink. Unknown to you, the frog water to drink. Unknown to you, the frog water to drink. Unknown to you, the frog water to drink. Unknown to you, the frog arrives.
