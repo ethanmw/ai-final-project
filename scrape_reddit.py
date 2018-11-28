@@ -63,9 +63,9 @@ if __name__ == "__main__":
 			top_level_comments.replace_more(limit=None, threshold=min_number_comments)
 			for comment in top_level_comments:
 				try:
-					print(comment)
+					#print(comment)
 					data_object = "{}\n".format(comment.body.replace("\n","").replace("\t"," ").rstrip())
-					for i in range(int(comment.score)):
+					for i in range(max(int(comment.score) / 1000.0, 1)):
 						data_object_list.append(data_object)
 				except:
 					pass
