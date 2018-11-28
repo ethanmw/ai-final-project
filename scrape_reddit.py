@@ -20,11 +20,11 @@ for subreddit in subreddits:
 		data_object_list.append("COMMENT,SCORE,SUBREDDIT\n")
 		for comment in top_level_comments:
 			try:
-				data_object = "{},{},{}\n".format(comment.body.replace("\n","").rstrip(), comment.score, subreddit)
+				data_object = "{}\n".format(comment.body.replace("\n","").replace("\t"," ").rstrip())
 				data_object_list.append(data_object)
 			except:
 				pass
 
-with open("data/aww.csv", "w+", encoding="utf-8") as f:
+with open("data/aww.txt", "w+", encoding="utf-8") as f:
 	for data_object in data_object_list:
 		f.write(data_object)
