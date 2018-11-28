@@ -56,7 +56,8 @@ if __name__ == "__main__":
 				try:
 					print(comment)
 					data_object = "{}\n".format(comment.body.replace("\n","").replace("\t"," ").rstrip())
-					data_object_list.append(data_object)
+					for i in range(int(comment.score)):
+						data_object_list.append(data_object)
 				except:
 					pass
 
