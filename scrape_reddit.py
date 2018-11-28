@@ -27,6 +27,11 @@ def parse_command_line():
 						default=300,
 						help="minimum number of comments to retrieve from a post")
 
+	parser.add_option("-o", "--output-file",
+						dest="output_file",
+						default="output.txt",
+						help="name of file to output to")
+
 	options, args = parser.parse_args()
 
 	return options
@@ -40,6 +45,7 @@ if __name__ == "__main__":
 	subreddits = options.subreddits
 	number_posts = options.number_posts
 	min_number_comments = options.comment_threshold
+	output_file = options.output_file
 
 	print("subreddits: {}".format(subreddits))
 	print("number_posts: {}".format(number_posts))
@@ -64,7 +70,7 @@ if __name__ == "__main__":
 				except:
 					pass
 
-	data_path = "data/{}.txt".format(subreddits[0])
+	data_path = "data/{}".format(output_file)
 	with open(data_path, "w+", encoding="utf-8") as f:
 		for data_object in data_object_list:
 			f.write(data_object)
