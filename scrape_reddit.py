@@ -1,55 +1,48 @@
 #!/usr/bin/env python3
 import praw
-import optparse
+import argparse
 
 def parse_command_line():
-	usage = ("usage: %prog [options]\n")
+	parser = argparse.ArgumentParser()
 
-	parser = optparse.OptionParser(usage=usage)
-
-	parser.add_option("-s", "--subreddits",
-						type="string",
-						action="callback",
-						callback=get_comma_separated_args,
+	parser.add_argument("-s", "--subreddits",
+						action="append",
 						dest="subreddits",
-						default=["aww"],
-						help="subreddits to scrape")
+						default=["aww"])
 
-	parser.add_option("-n", "--number-posts",
-						type="int",
+	parser.add_argument("-n", "--number-posts",
+						type=int,
 						dest="number_posts",
-						default=30,
-						help="number of posts to gather from each subreddit")
+						default=30)
 
-	parser.add_option("-t", "--comment-threshold",
-						type="int",
+	parser.add_argument("-t", "--comment-threshold",
+						type=int,
 						dest="comment_threshold",
-						default=300,
-						help="minimum number of comments to retrieve from a post")
+						default=300)
 
-	parser.add_option("-o", "--output-file",
+	parser.add_argument("-o", "--output-file",
 						dest="output_file",
-						default="output.txt",
-						help="name of file to output to")
+						default="output.txt")
 
-	options, args = parser.parse_args()
+	arguments = parser.parse_args()
 
-	return options
+	return arguments
 
 def get_comma_separated_args(option, opt, value, parser):
 	setattr(parser.values, option.dest, value.split(','))
 
 if __name__ == "__main__":
-	options = parse_command_line()
+	arguments = parse_command_line()
 	
-	subreddits = options.subreddits
-	number_posts = options.number_posts
-	min_number_comments = options.comment_threshold
-	output_file = options.output_file
+	subreddits = arguments.subreddits
+	number_posts = arguments.number_posts
+	min_number_comments = arguments.comment_threshold
+	output_file = arguments.output_file
 
-	print("subreddits: {}".format(subreddits))
-	print("number_posts: {}".format(number_posts))
-	print("min_number_comments: {}".format(min_number_comments))
+	# print("subreddits: {}".format(subreddits))
+	# print("number_posts: {}".format(number_posts))
+	# print("min_number_comments: {}".format(min_number_comments))
+	# print("output_file: {}".format(output_file))
 
 	reddit = praw.Reddit(client_id="ihIhF1immoEi8A",
 						client_secret="KV2ma1Fx41wUSYIMX8n_DUvxOwg",
@@ -63,7 +56,7 @@ if __name__ == "__main__":
 			top_level_comments.replace_more(limit=None, threshold=min_number_comments)
 			for comment in top_level_comments:
 				try:
-					#print(comment)
+					print(comment)
 					data_object = "{}\n".format(comment.body.replace("\n","").replace("\t"," ").rstrip())
 					for i in range(max(int(comment.score) / 1000.0, 1)):
 						data_object_list.append(data_object)
