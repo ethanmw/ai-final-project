@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import praw
 
 reddit = praw.Reddit(client_id="ihIhF1immoEi8A",
@@ -16,10 +17,9 @@ for subreddit in subreddits:
 	for submission in reddit.subreddit(subreddit).top(limit=number_posts):
 		top_level_comments = submission.comments
 		top_level_comments.replace_more(limit=None, threshold=min_number_comments)
-		
-		data_object_list.append("COMMENT,SCORE,SUBREDDIT\n")
 		for comment in top_level_comments:
 			try:
+				#print(comment)
 				data_object = "{}\n".format(comment.body.replace("\n","").replace("\t"," ").rstrip())
 				data_object_list.append(data_object)
 			except:
