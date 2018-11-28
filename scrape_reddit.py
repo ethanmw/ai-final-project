@@ -15,12 +15,19 @@ def parse_command_line():
 						default=["aww"],
 						help="subreddits to scrape")
 
+	parser.add_option("-n", "--number-posts",
+						type="int",
+						dest="number_posts",
+						default=30,
+						help="number of posts to gather from each subreddit")
 
+	parser.add_option("-t", "--comment-threshold",
+						type="int",
+						dest="comment_threshold",
+						default=300,
+						help="minimum number of comments to retrieve from a post")
 
 	options, args = parser.parse_args()
-
-	# if len(args) != 0:
-	# 	parser.error("Invalid number of arguments provided.")
 
 	return options
 
@@ -28,24 +35,20 @@ def get_comma_separated_args(option, opt, value, parser):
 	setattr(parser.values, option.dest, value.split(','))
 
 if __name__ == "__main__":
-	# print("this is the program")
-	# options = parse_command_line()
-	# for subreddit in options.subreddits:
-	# 	print(subreddit)
-
+	options = parse_command_line()
+	
 	subreddits = options.subreddits
-	number_posts = 
+	number_posts = options.number_posts
+	min_number_comments = options.comment_threshold
+
+	print("subreddits: {}".format(subreddits))
+	print("number_posts: {}".format(number_posts))
+	print("min_number_comments: {}".format(min_number_comments))
 
 	reddit = praw.Reddit(client_id="ihIhF1immoEi8A",
 						client_secret="KV2ma1Fx41wUSYIMX8n_DUvxOwg",
 						user_agent="erinhh:v1 (by /u/erinhh)")
 
-	# get the comments from the top n posts in each subreddit
-	number_posts = 30
-	# get at least 300 comments from oeach of those posts
-	min_number_comments = 300
-	# subreddits to gather comments from
-	subreddits = ["aww"]
 	data_object_list = []
 
 	for subreddit in subreddits:
@@ -61,6 +64,7 @@ if __name__ == "__main__":
 				except:
 					pass
 
-	with open("data/aww.txt", "w+", encoding="utf-8") as f:
+	data_path = "data/{}.txt".format(subreddits[0])
+	with open(data_path, "w+", encoding="utf-8") as f:
 		for data_object in data_object_list:
 			f.write(data_object)
