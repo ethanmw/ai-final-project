@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
 import sys
 import praw
+import argparse
 import markovify
 import requests.packages.urllib3
 
-def usage():
-	print('Usage: {} {}'.format('erinhhbot.py',  'inputfile'))
-	exit()
 def bot_login():
-	reddit = praw.Reddit(client_id="K5g9kvLpRnbxiQ",
+	reddit_instance = praw.Reddit(client_id="K5g9kvLpRnbxiQ",
 						client_secret="hRAt7B4HRxqoebJadbnVoxE_n98",
 						user_agent="erinhh:v1 (by /u/erinhh)",
 						username="erinhh",
 						password="NDFightingIrish2019")
-	return reddit
+	
+	return reddit_instance
 
 def reader(inputfile):
 	with open(inputfile, "r", encoding="utf-8") as file:
@@ -44,34 +43,40 @@ def run_bot(r, files):
 		#print chainreply
 		#comment.reply("This is so cute!") #posts the comment
 
+def parse_command_line():
+	parser = argparse.ArgumentParser()
+
+	parser.add_argument("-i", "--input-file",
+						action="append",
+						dest="input_files",
+						required=True)
+
+	parser.add_argument("-w", "--weight",
+						type=float,
+						action="append",
+						dest="weights",
+						required=True)
+
+	arguments = parser.parse_args()
+
+	return arguments
 
 if __name__ == ("__main__"):
-	args = sys.argv[1:]
-	if len(args) < 1:
-		usage()
+	arguments = parse_command_line()
+	input_files = arguments.input_files
+	weights = arguments.weights
 
+	# print("input_files: {}".format(input_files))
+	# print("weights {}".format(weights))
 
-	modelfiles = list()
-	second = False
-	filepair = ["file.txt", 0]
-	for arg in args:
-		if second:
-			second = False
-			try:
-				filepair[1] = float(arg)
-				modelfiles.append((filepair[0], filepair[1]))
-			except:
-				print("failed parsing number: {}".format(arg))
-				usage()
-		else:
-			second = True
-			filepair[0] = arg
-	if second:
-		print("wrong number of arguments!")
-		usage()
+	if len(input_files) is not len(weights):
+		raise ValueError("must specify the same number of input files and weights")
 
+	input_file_weight_pairs = []
+	for i in range(0,len(input_files)):
+		input_file_weight_pairs.append((input_files[i],weights[i]))
 
 	requests.packages.urllib3.disable_warnings()
 	r = bot_login()
-	run_bot(r, modelfiles)
+	run_bot(r, input_file_weight_pairs)
 
