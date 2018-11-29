@@ -8,7 +8,7 @@ def parse_command_line():
 	parser.add_argument("-s", "--subreddits",
 						action="append",
 						dest="subreddits",
-						default=["aww"])
+						required=True)
 
 	parser.add_argument("-n", "--number-posts",
 						type=int,
@@ -28,21 +28,12 @@ def parse_command_line():
 
 	return arguments
 
-def get_comma_separated_args(option, opt, value, parser):
-	setattr(parser.values, option.dest, value.split(','))
-
 if __name__ == "__main__":
 	arguments = parse_command_line()
-	
 	subreddits = arguments.subreddits
 	number_posts = arguments.number_posts
 	min_number_comments = arguments.comment_threshold
 	output_file = arguments.output_file
-
-	# print("subreddits: {}".format(subreddits))
-	# print("number_posts: {}".format(number_posts))
-	# print("min_number_comments: {}".format(min_number_comments))
-	# print("output_file: {}".format(output_file))
 
 	reddit = praw.Reddit(client_id="ihIhF1immoEi8A",
 						client_secret="KV2ma1Fx41wUSYIMX8n_DUvxOwg",
