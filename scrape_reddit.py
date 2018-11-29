@@ -25,7 +25,6 @@ def parse_command_line():
 						default="output.txt")
 
 	arguments = parser.parse_args()
-
 	return arguments
 
 if __name__ == "__main__":
@@ -55,6 +54,6 @@ if __name__ == "__main__":
 					pass
 
 	data_path = "data/{}".format(output_file)
-	with open(data_path, "w+", encoding="utf-8") as f:
+	with open(data_path, "w+", encoding="utf-8") as output_file:
 		for data_object in data_object_list:
-			f.write(data_object)
+			output_file.write(data_object)

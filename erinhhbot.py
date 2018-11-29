@@ -5,18 +5,9 @@ import argparse
 import markovify
 import requests.packages.urllib3
 
-def bot_login():
-	reddit_instance = praw.Reddit(client_id="K5g9kvLpRnbxiQ",
-						client_secret="hRAt7B4HRxqoebJadbnVoxE_n98",
-						user_agent="erinhh:v1 (by /u/erinhh)",
-						username="erinhh",
-						password="NDFightingIrish2019")
-	
-	return reddit_instance
-
-def reader(inputfile):
-	with open(inputfile, "r", encoding="utf-8") as file:
-		contents = file.read()
+def reader(input_file):
+	with open(input_file, "r", encoding="utf-8") as input_file:
+		contents = input_file.read()
 	return contents
 
 def buildchain(text, chain = {}):
@@ -36,10 +27,10 @@ def generatecomment(inputfiles):
 	print(sentence)
 	return sentence	
 
-def run_bot(r, files):
+def run_bot(r, input_file_weight_pairs):
 	for comment in r.subreddit('aww').comments(limit=1): #adds a comment to first 5 posts in /r/aww subreddit
 		#print comment
-		chainreply = generatecomment(files) #creates the comment from markov chain
+		chainreply = generatecomment(input_file_weight_pairs) #creates the comment from markov chain
 		#print chainreply
 		#comment.reply("This is so cute!") #posts the comment
 
@@ -58,7 +49,6 @@ def parse_command_line():
 						required=True)
 
 	arguments = parser.parse_args()
-
 	return arguments
 
 if __name__ == ("__main__"):
@@ -77,6 +67,10 @@ if __name__ == ("__main__"):
 		input_file_weight_pairs.append((input_files[i],weights[i]))
 
 	requests.packages.urllib3.disable_warnings()
-	r = bot_login()
-	run_bot(r, input_file_weight_pairs)
+	reddit_instance = praw.Reddit(client_id="K5g9kvLpRnbxiQ",
+								client_secret="hRAt7B4HRxqoebJadbnVoxE_n98",
+								user_agent="erinhh:v1 (by /u/erinhh)",
+								username="erinhh",
+								password="NDFightingIrish2019")
+	run_bot(reddit_instance, input_file_weight_pairs)
 
