@@ -31,7 +31,7 @@ def run_bot(r, input_file_weight_pairs):
 	for comment in r.subreddit('aww').comments(limit=1): #adds a comment to first 5 posts in /r/aww subreddit
 		#print comment
 		chainreply = generatecomment(input_file_weight_pairs) #creates the comment from markov chain
-		#print chainreply
+		#print(chainreply)
 		#comment.reply("This is so cute!") #posts the comment
 
 def parse_command_line():

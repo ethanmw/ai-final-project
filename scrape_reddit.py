@@ -23,6 +23,11 @@ def parse_command_line():
 	parser.add_argument("-o", "--output-file",
 						dest="output_file",
 						default="output.txt")
+	
+	parser.add_argument("-m", "--mode",
+						choices=['alltime', 'today'],
+						dest="mode",
+						default='alltime')
 
 	arguments = parser.parse_args()
 	return arguments
@@ -33,6 +38,7 @@ if __name__ == "__main__":
 	number_posts = arguments.number_posts
 	min_number_comments = arguments.comment_threshold
 	output_file = arguments.output_file
+	mode = arguments.mode
 
 	reddit = praw.Reddit(client_id="ihIhF1immoEi8A",
 						client_secret="KV2ma1Fx41wUSYIMX8n_DUvxOwg",
@@ -41,7 +47,11 @@ if __name__ == "__main__":
 	data_object_list = []
 
 	for subreddit in subreddits:
-		for submission in reddit.subreddit(subreddit).top(limit=number_posts):
+		if mode == 'alltime':
+			posts = reddit.subreddit(subreddit).top(limit=number_posts)
+		elif mode == 'today':
+			posts = reddit.subreddit(subreddit).top(time_filter="day", limit=number_posts)
+		for submission in posts:
 			top_level_comments = submission.comments
 			top_level_comments.replace_more(limit=None, threshold=min_number_comments)
 			for comment in top_level_comments:
