@@ -77,7 +77,7 @@ if __name__ == "__main__":
 			submission_number = submission_number + 1
 
 
-	data_path = "data/{}".format(output_file)
+	data_path = "data/weighted_comments/{}".format(output_file)
 	with open(data_path, "w+", encoding="utf-8") as output_file:
 		for data_object in data_object_list:
 			output_file.write(data_object)
