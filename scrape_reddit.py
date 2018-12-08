@@ -39,6 +39,7 @@ def parse_command_line():
 
 if __name__ == "__main__":
 	arguments = parse_command_line()
+
 	subreddits = arguments.subreddits
 	number_posts = arguments.number_posts
 	min_number_comments = arguments.comment_threshold
@@ -52,32 +53,29 @@ if __name__ == "__main__":
 
 	data_object_list = []
 
-	for subreddit in subreddits:
-		if mode == 'alltime':
-			posts = reddit.subreddit(subreddit).top(limit=number_posts)
-		elif mode == 'today':
-			posts = reddit.subreddit(subreddit).top(time_filter="day", limit=number_posts)
-
-		submission_number = 1
-		for submission in posts:
-			top_level_comments = submission.comments
-			top_level_comments.replace_more(limit=None, threshold=min_number_comments)
-			comment_number = 1
-			for comment in top_level_comments:
-				try:
-					data_object = "{}\n".format(comment.body.replace("\n","").replace("\t"," ").rstrip())
-					for i in range(0, int(max(comment.score / comment_scale_ratio, 1))):
-						data_object_list.append(data_object)
-					print("submission: {} comment: {}".format(submission_number, comment_number))
-				except:
-					print("something went wrong with submission: {} comment: {}".format(submission_number, comment_number))
-				
-				comment_number = comment_number + 1
-			
-			submission_number = submission_number + 1
-
-
 	data_path = "data/weighted_comments/{}".format(output_file)
 	with open(data_path, "w+", encoding="utf-8") as output_file:
-		for data_object in data_object_list:
-			output_file.write(data_object)
+		for subreddit in subreddits:
+			if mode == 'alltime':
+				posts = reddit.subreddit(subreddit).top(limit=number_posts)
+			elif mode == 'today':
+				posts = reddit.subreddit(subreddit).top(time_filter="day", limit=number_posts)
+
+			submission_number = 0
+			for submission in posts:
+				submission_number = submission_number + 1
+				top_level_comments = submission.comments
+				top_level_comments.replace_more(limit=None, threshold=min_number_comments)
+				
+				comment_number = 0
+				for comment in top_level_comments:
+					comment_number = comment_number + 1
+
+					try:
+						data_object = "{}\n".format(comment.body.replace("\n","").replace("\t"," ").rstrip())
+						comment_weight = int(max(comment.score / comment_scale_ratio, 1))
+						for i in range(0, comment_weight):
+							output_file.write(data_object)
+						print("submission: {} comment: {} appended {} times".format(submission_number, comment_number, comment_weight))
+					except:
+						print("something went wrong appending submission: {} comment: {}".format(submission_number, comment_number))

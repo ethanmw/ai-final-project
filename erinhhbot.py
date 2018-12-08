@@ -52,6 +52,7 @@ def parse_command_line():
 
 if __name__ == ("__main__"):
 	arguments = parse_command_line()
+	
 	input_files = arguments.input_files
 	weights = arguments.weights
 	state_size = arguments.state_size
