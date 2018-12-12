@@ -29,6 +29,24 @@ $ python erinhhbot.py -i data/aww.txt -w 1 -s 4
 state_size: 4
 Of course! But seriously this dog has done more with its life than I have done with mine.
 
+$ python erinhhbot.py -i data/unweighted_comments/aww.txt -w 1 -s 3
+Got shit in my eyes love it.
+max common ngrams: 3 sentence: Got shit in my eyes again.
+
+L O FUCKING L
+
+$ python erinhhbot.py -i data/unweighted_comments/aww.txt -w 1 -s 2
+Hi hoomans I▒m just here to say that my future child will have a dog owner, nor do I convince my mom almost put her on a post.
+max common ngrams: 6 sentence: Hi hoomans I▒m just here to say snek cause I talk like a retarded fuckin baby
+
+$ python erinhhbot.py -i data/unweighted_comments/aww.txt -w 1 -s 4
+If you don't play with that dog, you cruel inhuman person!
+max common ngrams: 4 sentence: shut down your facebook and go play with that dog, you cruel inhuman person!
+
+$ python erinhhbot.py -i data/unweighted_comments/aww.txt -w 1 -s 4
+This is the most adorable and sweetest things I've ever seen on Reddit. Ever. Thank you.
+max common ngrams: 5 sentence: This is literally one of the most adorable and sweetest things I've ever seen.
+
 ==============================================================================================================================
 
 $ python erinhhbot.py -i data/donald.txt -w 1 -s 3
