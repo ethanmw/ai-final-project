@@ -76,10 +76,18 @@ if __name__ == ("__main__"):
 	# run_bot(reddit_instance, input_file_weight_pairs)
 
 	generated_comment = generate_comment(input_file_weight_pairs, state_size)
-	print(generated_comment)
+	print("generated comment: {}".format(generated_comment))
 
 	result = utils.ngram_similarity_absolute(generated_comment, input_files[0], state_size)
-	print("max sahred ngrams: {}".format(result[0]))
-	print("most similar sentence: {}".format(result[1]))
-	res2 = utils.ngram_similarity_percentage(generated_comment, input_files[0], state_size)
-	print("by percentage: {} sentence: {}".format(res2[0], res2[1]))
+	print("the most ngrams that the generated comment shares with a sentence in the corpus is: {}".format(result[0]))
+	print("that sentence in the corpus is: {}".format(result[1]))
+
+	result = utils.ngram_similarity_percentage(generated_comment, input_files[0], state_size)
+	print("the highest percentage of ngrams that a sentence in the corpus has in common with the generated comment is: {}".format(result[0]))
+	print("that sentence in the corpus is: {}".format(result[1]))
+
+	result = utils.support(generated_comment, input_files[0], state_size)
+	print("the sentences in the corpus that provide support for the ngrams in the generated comment are: {}".format(result))
+	
+	result = utils.ngram_frequencies(generated_comment, input_files[0], state_size)
+	print("the frequencies of the ngrams in the generated comment are: {}".format(result))
