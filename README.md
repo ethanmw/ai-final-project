@@ -14,7 +14,6 @@ pip install markovify
 
 ## Basic Usage, Running the Program
 
-#### To run the scrape_reddit file:
 
 #### To run the bot:
 ```
@@ -25,3 +24,5 @@ To add different weights to the data files use the -w flag.
 This script will output a sentence created from the Markov chain from the aww.txt file and output it to the command line.     
 We have commented out the line of code that directly posts it to reddit to avoid having our bot be blocked by reddit.       
 You can find examples of some of our outputs in the good_examples.txt file.     
+
+#### To run the Regression Model:
