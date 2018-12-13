@@ -2,20 +2,16 @@ $ python erinhhbot.py -i data/aww.txt -w 1 -s 3
 state_size: 3
 This is so wholesome I am actually crying. A post has never done this, he'll just lay down when they▒re that sleepy?
 
-This is a really good example I think. It is not all original since it is composed of parts of comments
-but it combines the comments in a way that make sense -Chris
 
 $ python erinhhbot.py -i data/aww.txt -w 1 -s 3
 state_size: 3
 I love how he▒s eating the snow on the ground, and he would refuse to come in.
 
-This one is awesome! I legitimately thought that it would be in the corpus but its not! -Chris
 
 $ python erinhhbot.py -i data/aww.txt -w 1 -s 3
 state_size: 3
 The goodest boy I ever did see. What a good girl! Border Collies are so god damn sweet. A piece of me just melted.
 
-Note: Pretty cohesive string of thoughts here
 
 $ python erinhhbot.py -i data/aww.txt -w 1 -s 4
 state_size: 4
@@ -33,7 +29,6 @@ $ python erinhhbot.py -i data/unweighted_comments/aww.txt -w 1 -s 3
 Got shit in my eyes love it.
 max common ngrams: 3 sentence: Got shit in my eyes again.
 
-L O FUCKING L
 
 $ python erinhhbot.py -i data/unweighted_comments/aww.txt -w 1 -s 2
 Hi hoomans I▒m just here to say that my future child will have a dog owner, nor do I convince my mom almost put her on a post.
@@ -61,14 +56,11 @@ $ python erinhhbot.py -i data/donald.txt -w 1 -s 4
 state_size: 4
 Hello Mr. Trump! I have three kids, and as a mom, I feel hope for the future of the party? When did you start considering yourself a conservative, and why?
 
-This one is actually really good if you consider that most of the text in donald.txt is from the AMA. If you replace the first question mark
-I think it would fool people. -Chris
 
 $ python erinhhbot.py -i data/donald.txt -w 1 -s 4
 state_size: 4
 Welcome to reddit from Canada.Despite his needlessly hostile rhetoric, do you think there's any chance you can convince Trudeau to be more careful?
 
-Same as the previous one. -Chris
 
 $ python erinhhbot.py -i data/aww.txt -w 1 -s 5
 state_size: 5
