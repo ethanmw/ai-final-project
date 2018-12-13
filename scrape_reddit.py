@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import praw
 import argparse
+import math
 
 def parse_command_line():
 	parser = argparse.ArgumentParser()
@@ -29,11 +30,6 @@ def parse_command_line():
 						dest="mode",
 						default='alltime')
 
-	parser.add_argument("-r", "--comment-scale-ratio",
-						type=float,
-						dest="comment_scale_ratio",
-						default=1000)
-
 	parser.add_argument("-d", "--record-scores",
 						type=bool,
 						dest="record_scores",
@@ -50,7 +46,6 @@ if __name__ == "__main__":
 	min_number_comments = arguments.comment_threshold
 	output_file = arguments.output_file
 	mode = arguments.mode
-	comment_scale_ratio = arguments.comment_scale_ratio
 	record_scores = arguments.record_scores
 
 	reddit = praw.Reddit(client_id="ihIhF1immoEi8A",
@@ -78,7 +73,7 @@ if __name__ == "__main__":
 
 						try:
 							data_object = "{}\n".format(comment.body.replace("\n","").replace("\t"," ").rstrip())
-							comment_weight = int(max(comment.score / comment_scale_ratio, 1))
+							comment_weight = int(math.log10(comment.score))
 							for i in range(0, comment_weight):
 								output_file.write(data_object)
 							print("submission: {} comment: {} appended {} times".format(submission_number, comment_number, comment_weight))
