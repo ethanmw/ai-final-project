@@ -5,6 +5,7 @@ import csv
 import argparse
 import erinhhbot
 from sklearn import linear_model
+from sklearn.decomposition import PCA
 
 
 def transform_scored_comments(data_file_path):
@@ -126,6 +127,25 @@ if __name__ == ("__main__"):
 	input_file_weight_pairs = []
 	for i in range(0,len(input_files)):
 		input_file_weight_pairs.append((input_files[i],weights[i]))
+
+	print("start pca")
+
+	pca = PCA(n_components=len(features[0]))
+	transformed_features = pca.fit_transform(features)
+	explained_variance_ratio = pca.explained_variance_ratio_
+
+	for i in range(0, len(transformed_features[0])):
+		if explained_variance_ratio[i] < 0.01:
+			break
+
+	new_transformed_features = []
+	for feature_list in transformed_features:
+		new_feature_list = []
+		for n in range(0, j):
+			new_feature_list.append(feature_list[n])
+		new_transformed_features.append(new_feature_list)
+
+	print(new_transformed_features[0])
 
 	print("Starting fit")
 	linear_regression_model = linear_model.LinearRegression()
